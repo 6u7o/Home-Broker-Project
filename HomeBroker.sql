@@ -42,8 +42,3 @@ INSERT INTO HomeBroker.Assets (asset_name, available_quantity, price) VALUES
     ("AZUL4", 200, 21),
     ("VALE4", 200, 34),
     ("MGLU3", 200, 26);
-
--- INSERT INTO HomeBroker.UsersAssets (sale_id, product_id, quantity) VALUES
---     (1, 1, 5),
---     (1, 2, 10),
---     (2, 3, 15);
