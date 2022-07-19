@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const getStockInfo = require('../API/fetchStock');
 const assetsService = require('../services/assetsService');
 
 const assetsController = Router();
@@ -28,9 +29,9 @@ assetsController.get('/:idAtivo', async (req, res)=> {
 
 // retorna informações do ativo tal (id/nome, valor, volume...)
 
-assetsController.get('/b3', async (req, res)=> {
-  await assetsService.addNewAsset(req.body);
-  return res.status(200).json({msg: 'ok'});
+assetsController.get('/', async (req, res)=> {
+  const response = await getStockInfo();
+  return res.status(200).json(response);
 });
 
 // retorna todos ativos da b3
