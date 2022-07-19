@@ -1,19 +1,7 @@
 const { Router } = require('express');
-const getStockInfo = require('../API/fetchStock');
 const assetsService = require('../services/assetsService');
-
+const assetsModel = require('../models/assetsModel');
 const assetsController = Router();
-
-// assetsController.get('/', async (req, res)=> {
-//   const result = await assetsService.getAvailableAssets();
-//   console.log('result: ', result);
-//   return res.status(200).json(result);
-// });
-
-// assetsController.post('/', async (req, res)=> {
-//   await assetsService.addNewAsset(req.body);
-//   return res.status(200).json({msg: 'ok'});
-// });
 
 assetsController.get('/:idCliente', async (req, res)=> {
   await assetsService.addNewAsset(req.body);
@@ -30,10 +18,18 @@ assetsController.get('/:idAtivo', async (req, res)=> {
 // retorna informações do ativo tal (id/nome, valor, volume...)
 
 assetsController.get('/', async (req, res)=> {
-  const response = await getStockInfo();
+  const data = await assetsModel.getAllAssets();
+  return res.status(200).json(data);
+});
+
+// retorna todos ativos
+
+assetsController.post('/', async (req, res)=> {
+  const { stock } = req.body;
+  const response = await assetsService.addNewAsset(stock);
   return res.status(200).json(response);
 });
 
-// retorna todos ativos da b3
+// adiciona novas ativos no banco de dados
 
 module.exports = assetsController;

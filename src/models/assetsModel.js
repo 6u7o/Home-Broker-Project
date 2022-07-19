@@ -1,25 +1,26 @@
+const getStockInfo = require('../API/fetchStock');
 const supabase = require('../db/connection');
 
-const getAvailableAssets = async () => {
+const getAllAssets = async () => {
   const { data } = await supabase.from('Assets')
     .select()
   return data;
   
 }
 
-const addNewAsset = async (assetObj) => {
-  const { name, quantity, price } = assetObj;
-  const { data/* , error */} = await supabase.from('Assets')
+const addNewAsset = async (stock) => {
+  const { name, volume, price } = await getStockInfo(stock);
+  const { data } = await supabase.from('Assets')
     .insert([{
       asset_name: name,
-      available_quantity: quantity,
+      asset_volume: volume,
       asset_price: price
     }])
-  console.log(data);  
+  return data;  
 }
 
 
 module.exports = {
   addNewAsset,
-  getAvailableAssets
+  getAllAssets
 };

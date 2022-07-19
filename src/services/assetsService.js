@@ -1,15 +1,16 @@
 const assetsModel = require('../models/assetsModel');
 
-const addNewAsset = async (assetObj) => {
-  await assetsModel.addNewAsset(assetObj);
+const addNewAsset = async (stock) => {
+  const result = await assetsModel.addNewAsset(stock);
+  return result;
 };
 
-const getAvailableAssets = async () => {
-  const assets = await assetsModel.getAvailableAssets();
+const getAllAssets = async () => {
+  const assets = await assetsModel.getAllAssets();
   return assets;
 };
 
 module.exports = {
   addNewAsset,
-  getAvailableAssets
+  getAllAssets
 };
