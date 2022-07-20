@@ -10,7 +10,13 @@ const getAllAssets = async () => {
   return assets;
 };
 
+const getAssetsByClientId = async (idCliente) => {
+  const assets = await assetsModel.getAssetsByClientId(idCliente);
+  return assets;
+};
+
 module.exports = {
   addNewAsset,
-  getAllAssets
+  getAllAssets,
+  getAssetsByClientId
 };
