@@ -4,15 +4,16 @@ const accountsService = require('../services/accountsService');
 const accountsController = Router();
 
 accountsController.post('/deposito', async (req, res)=> {
-  await accountsService.addNewAsset(req.body);
-  return res.status(200).json({msg: 'ok'});
+  const {user_id, deposit_value} = req.body;
+  const response = await accountsService.deposit(user_id, deposit_value)
+  return res.status(200).json(response);
 });
 // deposita algum valor na conta logada
 
 
 accountsController.post('/saque', async (req, res)=> {
-  await accountsService.addNewAsset(req.body);
-  return res.status(200).json({msg: 'ok'});
+  // await accountsService.addNewAsset(req.body);
+  // return res.status(200).json({msg: 'ok'});
 });
 
 // saca algum valor da conta logada

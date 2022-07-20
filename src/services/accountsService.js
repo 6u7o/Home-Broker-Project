@@ -11,7 +11,16 @@ const getAssetsByClientId = async (idCliente) => {
   return assets;
 };
 
+const deposit = async (user_id, deposit_value) => {
+  const [userInfo] = await accountsModel.getUserInfo(user_id);
+  const { balance } = userInfo;
+  const amount = balance + deposit_value
+  const result = await accountsModel.deposit(user_id, amount);
+  return result;
+}
+
 module.exports = {
   getUserInfo,
-  getAssetsByClientId
+  getAssetsByClientId,
+  deposit
 };
