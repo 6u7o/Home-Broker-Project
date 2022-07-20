@@ -7,6 +7,15 @@ const getUserInfo = async (user_id) => {
   return data;
 }
 
+const getAssetsByClientId = async (idCliente) => {
+  const { data } = await supabase.from('UsersAssets')
+    .select()
+    .eq('user_id', idCliente)
+  return data;
+}
+
+
 module.exports = {
   getUserInfo,
+  getAssetsByClientId
 };

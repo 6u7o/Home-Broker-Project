@@ -59,7 +59,13 @@ const sell = async (sellOrder) => {
   return result;
 };
 
+const getAssetInfoById = async (idAtivo) => {
+  const assetInfo = await assetsModel.getAssetInfo(idAtivo);
+  return assetInfo;
+};
+
 module.exports = {
   buy,
-  sell
+  sell,
+  getAssetInfoById
 };

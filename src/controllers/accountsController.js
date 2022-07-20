@@ -25,4 +25,11 @@ accountsController.get('/:idCliente', async (req, res)=> {
 
 // retorna informaçoes do cliente tal
 
+
+accountsController.get('/ativos/:idCliente', async (req, res)=> {
+  const { idCliente } = req.params;
+  const response = await accountsService.getAssetsByClientId(idCliente);
+  return res.status(200).json(response);
+});
+
 module.exports = accountsController;

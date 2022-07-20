@@ -38,6 +38,12 @@ investmentsController.post('/vender', orders.salesValidation, async (req, res)=>
 //   asset_quantity: 20
 // }
 
+investmentsController.get('/ativos/:idAtivo', async (req, res)=> {
+  const { idAtivo } = req.params;
+  const response = await investmentsService.getAssetInfoById(idAtivo);
+  return res.status(200).json(response);
+});
+
 
 
 module.exports = investmentsController;

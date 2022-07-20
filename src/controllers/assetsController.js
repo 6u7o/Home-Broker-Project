@@ -3,21 +3,6 @@ const assetsService = require('../services/assetsService');
 const assetsModel = require('../models/assetsModel');
 const assetsController = Router();
 
-assetsController.get('/:idCliente', async (req, res)=> {
-  const { idCliente } = req.params;
-  const response = await assetsService.getAssetsByClientId(idCliente);
-  return res.status(200).json(response);
-});
-// retorna todos ativos de cliente tal
-
-
-assetsController.get('/:idAtivo', async (req, res)=> {
-  // await assetsService.addNewAsset(req.body);
-  // return res.status(200).json({msg: 'ok'});
-});
-
-// retorna informações do ativo tal (id/nome, valor, volume...)
-
 assetsController.get('/', async (req, res)=> {
   const data = await assetsModel.getAllAssets();
   return res.status(200).json(data);
