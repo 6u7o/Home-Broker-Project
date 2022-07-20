@@ -13,14 +13,22 @@ const addNewAsset = async (stock) => {
   const { data } = await supabase.from('Assets')
     .insert([{
       asset_name: name,
-      asset_volume: volume,
+      available_quantity: volume,
       asset_price: price
     }])
   return data;  
 }
 
+const getAssetInfo = async (asset_id) => {
+  const { data } = await supabase.from('Assets')
+    .select()
+    .eq('id', asset_id)
+  return data;
+}
+
 
 module.exports = {
   addNewAsset,
-  getAllAssets
+  getAllAssets,
+  getAssetInfo
 };

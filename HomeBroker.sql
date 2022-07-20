@@ -32,13 +32,3 @@ CREATE TABLE UsersAssets (
         REFERENCES Assets (id)
         ON DELETE CASCADE
 )  ENGINE=INNODB;
-
-INSERT INTO HomeBroker.Users (user_name, email, password, balance) VALUES
-    ("José Henrique", "jose42h@gmail.com", "jh272792", 100),
-    ("Maria da Silva", "mari20s@gmail.com", "4421ms2ms", 500);
-
-INSERT INTO HomeBroker.Assets (asset_name, available_quantity, price) VALUES
-    ("PETR4", 200, 55),
-    ("AZUL4", 200, 21),
-    ("VALE4", 200, 34),
-    ("MGLU3", 200, 26);
