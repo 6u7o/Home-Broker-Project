@@ -4,28 +4,25 @@ const accountsService = require('../services/accountsService');
 const accountsController = Router();
 
 accountsController.post('/deposito', async (req, res)=> {
-  const {user_id, deposit_value} = req.body;
-  const response = await accountsService.deposit(user_id, deposit_value)
+  const {user_id, value} = req.body;
+  const response = await accountsService.deposit(user_id, value)
   return res.status(200).json(response);
 });
-// deposita algum valor na conta logada
-
 
 accountsController.post('/saque', async (req, res)=> {
-  // await accountsService.addNewAsset(req.body);
-  // return res.status(200).json({msg: 'ok'});
+  const {user_id, value} = req.body;
+  const response = await accountsService.withdraw(user_id, value)
+  if (!response) {
+    return res.status(404).json({message: 'not enough funds to complete withdraw'});
+  }
+  return res.status(200).json(response);
 });
-
-// saca algum valor da conta logada
 
 accountsController.get('/:idCliente', async (req, res)=> {
   const { idCliente } = req.params;
   const response = await accountsService.getUserInfo(idCliente);
   return res.status(200).json(response);
 });
-
-// retorna informaçoes do cliente tal
-
 
 accountsController.get('/ativos/:idCliente', async (req, res)=> {
   const { idCliente } = req.params;

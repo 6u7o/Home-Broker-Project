@@ -14,16 +14,15 @@ const getAssetsByClientId = async (idCliente) => {
   return data;
 }
 
-const deposit = async (user_id, amount) => {
+const updateUserBalance = async (user_id, amount) => {
   const { data } = await supabase.from('Users')
     .update({ balance: amount })
     .match({ id: user_id})
   return data;
 }
 
-
 module.exports = {
   getUserInfo,
   getAssetsByClientId,
-  deposit
+  updateUserBalance
 };
