@@ -10,9 +10,9 @@ investmentsController.post('/comprar', async (req, res)=> {
   //  2.  verificar se a quantidade a ser comprada está disponível
   const response = await investmentsService.buy(req.body);
   if (!response) {
-    return res.status(404).json({message: 'not enough funds to complete order'});
+    return res.status(401).json({message: 'not enough funds to complete order'});
   }
-  return res.status(200).json(response);
+  return res.status(201).json(response);
 });
 
 // envia uma ordem de compra
@@ -25,7 +25,7 @@ investmentsController.post('/vender', orders.salesValidation, async (req, res)=>
   // const { user_id, asset_id,/*  asset_quantity */ } = req.body;
 
   const response = await investmentsService.sell(req.body);
-  return res.status(200).json(response);
+  return res.status(201).json(response);
 });
 // envia uma ordem de venda
 

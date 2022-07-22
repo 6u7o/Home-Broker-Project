@@ -13,7 +13,7 @@ assetsController.get('/', async (req, res)=> {
 assetsController.post('/', async (req, res)=> {
   const { stock } = req.body;
   const response = await assetsService.addNewAsset(stock);
-  return res.status(200).json(response);
+  return res.status(201).json(response);
 });
 
 // adiciona novas ativos no banco de dados
