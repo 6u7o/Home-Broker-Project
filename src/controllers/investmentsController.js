@@ -2,10 +2,11 @@ const { Router } = require('express');
 const investmentsService = require('../services/investmentsService');
 // const investmentsModel = require('../models/investimentsModel');
 const orders = require('../middlewares/orders');
+const { reqBodyIdValidation } = require('../middlewares/userOrderValidation');
 
 const investmentsController = Router();
 
-investmentsController.post('/comprar', async (req, res)=> {
+investmentsController.post('/comprar', reqBodyIdValidation,  async (req, res)=> {
   //  1.  validação para saber se o cliente já tem ações com este ID, se tiver, somar a quantidade comprada ao UsersAssets no DB
   //  2.  verificar se a quantidade a ser comprada está disponível
   const response = await investmentsService.buy(req.body);
@@ -18,7 +19,7 @@ investmentsController.post('/comprar', async (req, res)=> {
 // envia uma ordem de compra
 
 
-investmentsController.post('/vender', orders.salesValidation, async (req, res)=> {
+investmentsController.post('/vender', reqBodyIdValidation, orders.salesValidation, async (req, res)=> {
   //  4.  verificar se o ID do asset existe no DB
 
 

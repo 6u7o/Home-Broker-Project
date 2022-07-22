@@ -1,15 +1,16 @@
 const { Router } = require('express');
+const { reqBodyIdValidation, reqParamsIdValidation } = require('../middlewares/userOrderValidation');
 const accountsService = require('../services/accountsService');
 
 const accountsController = Router();
 
-accountsController.post('/deposito', async (req, res)=> {
+accountsController.post('/deposito', reqBodyIdValidation, async (req, res)=> {
   const {user_id, value} = req.body;
   const response = await accountsService.deposit(user_id, value)
   return res.status(201).json(response);
 });
 
-accountsController.post('/saque', async (req, res)=> {
+accountsController.post('/saque', reqBodyIdValidation, async (req, res)=> {
   const {user_id, value} = req.body;
   const response = await accountsService.withdraw(user_id, value)
   if (!response) {
@@ -18,13 +19,13 @@ accountsController.post('/saque', async (req, res)=> {
   return res.status(201).json(response);
 });
 
-accountsController.get('/:idCliente', async (req, res)=> {
+accountsController.get('/:idCliente', reqParamsIdValidation, async (req, res)=> {
   const { idCliente } = req.params;
   const response = await accountsService.getUserInfo(idCliente);
   return res.status(200).json(response);
 });
 
-accountsController.get('/ativos/:idCliente', async (req, res)=> {
+accountsController.get('/ativos/:idCliente', reqParamsIdValidation, async (req, res)=> {
   const { idCliente } = req.params;
   const response = await accountsService.getAssetsByClientId(idCliente);
   return res.status(200).json(response);
