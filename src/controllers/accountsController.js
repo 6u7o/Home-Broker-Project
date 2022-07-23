@@ -1,34 +1,36 @@
-const { Router } = require('express');
-const { reqBodyIdValidation, reqParamsIdValidation } = require('../middlewares/userOrderValidation');
 const accountsService = require('../services/accountsService');
 
-const accountsController = Router();
 
-accountsController.post('/deposito', reqBodyIdValidation, async (req, res)=> {
+const deposito = async (req, res)=> {
   const {user_id, value} = req.body;
   const response = await accountsService.deposit(user_id, value)
   return res.status(201).json(response);
-});
+};
 
-accountsController.post('/saque', reqBodyIdValidation, async (req, res)=> {
+const saque = async (req, res)=> {
   const {user_id, value} = req.body;
   const response = await accountsService.withdraw(user_id, value)
   if (!response) {
     return res.status(401).json({message: 'not enough funds to complete withdraw'});
   }
   return res.status(201).json(response);
-});
+};
 
-accountsController.get('/:idCliente', reqParamsIdValidation, async (req, res)=> {
+const saldo = async (req, res)=> {
   const { idCliente } = req.params;
   const response = await accountsService.getUserInfo(idCliente);
   return res.status(200).json(response);
-});
+};
 
-accountsController.get('/ativos/:idCliente', reqParamsIdValidation, async (req, res)=> {
+const ativosCliente = async (req, res)=> {
   const { idCliente } = req.params;
   const response = await accountsService.getAssetsByClientId(idCliente);
   return res.status(200).json(response);
-});
+};
 
-module.exports = accountsController;
+module.exports = {
+  deposito,
+  saque,
+  saldo,
+  ativosCliente
+};

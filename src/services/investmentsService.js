@@ -42,7 +42,6 @@ const sell = async (sellOrder) => {
   const { id, asset_quantity: currentAmount } = response;
   const newAmount = currentAmount - asset_quantity;
   let result;
-  console.log('newAmount: ', newAmount);
   const [assetInfo] = await assetsModel.getAssetInfo(asset_id)
   const { asset_price, available_quantity } = assetInfo;
   if (newAmount <= 0) {

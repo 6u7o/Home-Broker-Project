@@ -16,7 +16,6 @@ const reqParamsIdValidation = async (req, res, next) => {
 
   const { idCliente } = req.params;
 
-  console.log('id: ', id, 'idCliente: ', idCliente);
 
   if (id !== Number(idCliente)) {
     return res.status(401).json({ message: 'Você só pode fazer operações para sua conta' });

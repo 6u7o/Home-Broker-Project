@@ -3,9 +3,7 @@ const { generateJWTToken } = require('../utils/jwt');
 
 const checkLogin = async (email, password) => {
   const user = await loginModel.checkLogin(email, password)
-
-  console.log('user: ', user[0]);
-  if (!user) return false;
+  if (user.length === 0) return false;
 
   const token = generateJWTToken(user[0]);
   return token;
