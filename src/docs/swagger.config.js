@@ -1,3 +1,7 @@
+require('dotenv').config();
+
+const { HEROKU_URL } = process.env
+
 const swaggerConfig = {
   definition: {
     openapi: '3.0.1',
@@ -7,7 +11,7 @@ const swaggerConfig = {
       version: '1.0'
     },
     servers: [{
-      url: 'http://localhost:3000', //mudar depois do deploy
+      url: HEROKU_URL,
       description: 'servidor local'
     }],
     components: {
