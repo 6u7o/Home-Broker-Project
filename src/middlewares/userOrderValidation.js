@@ -3,6 +3,7 @@ const { tokenAuth } = require('../utils/jwt');
 const reqBodyIdValidation = async (req, res, next) => {
   const auth = req.headers.authorization;
   const { user_id } = req.body;
+  // logica para funcionar tanto pelo swagger quanto por requisição normal
   if ( auth[0] === 'B') {
     const [, token] = auth.split(' ');
     const { id } = await tokenAuth(token);
