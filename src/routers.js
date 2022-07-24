@@ -1,15 +1,20 @@
 const { Router } = require('express');
-const accountsController = require('./controllers/accountsController');
-const assetsController = require('./controllers/assetsController');
-const investmentsController = require('./controllers/investmentsController');
+const { tokenValidation } = require('./middlewares/tokenValidation');
+const investmentsRouter = require('./routes/investmentsRouter');
+const accountsRouter = require('./routes/accountsRouter');
+const assetsRouter = require('./routes/assetsRouter');
+const loginRouter = require('./routes/loginRouter');
 
 const routers = Router();
 
-routers.use('/investimentos', investmentsController);
 
-routers.use('/conta', accountsController);
+routers.use('/investimentos', tokenValidation, investmentsRouter);
 
-routers.use('/ativos', assetsController);
+routers.use('/conta', tokenValidation, accountsRouter);
+
+routers.use('/ativos', tokenValidation, assetsRouter);
+
+routers.use('/', loginRouter);
 
 
 module.exports = routers;

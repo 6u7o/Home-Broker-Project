@@ -1,20 +1,31 @@
-const { Router } = require('express');
-const assetsService = require('../services/assetsService');
-
-const investmentsController = Router();
-
-investmentsController.post('/vender', async (req, res)=> {
-  await assetsService.addNewAsset(req.body);
-  return res.status(200).json({msg: 'ok'});
-});
-// envia uma ordem de venda
+const investmentsService = require('../services/investmentsService');
 
 
-investmentsController.post('/comprar', async (req, res)=> {
-  await assetsService.addNewAsset(req.body);
-  return res.status(200).json({msg: 'ok'});
-});
+const comprar = async (req, res)=> {
+  const response = await investmentsService.buy(req.body);
+  if (!response) {
+    return res.status(401).json({message: 'Saldo insuficiente para completar a overriddenMimeType'});
+  }
+  return res.status(201).json(response);
+};
 
-// envia uma ordem de compra
 
-module.exports = investmentsController;
+
+const vender = async (req, res)=> {
+  const response = await investmentsService.sell(req.body);
+  return res.status(201).json(response);
+};
+
+const ativosPeloId = async (req, res)=> {
+  const { idAtivo } = req.params;
+  const response = await investmentsService.getAssetInfoById(idAtivo);
+  return res.status(200).json(response);
+};
+
+
+
+module.exports = {
+  comprar,
+  vender,
+  ativosPeloId
+};

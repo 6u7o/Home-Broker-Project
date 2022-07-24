@@ -1,39 +1,18 @@
-const { Router } = require('express');
-const getStockInfo = require('../API/fetchStock');
 const assetsService = require('../services/assetsService');
+const assetsModel = require('../models/assetsModel');
 
-const assetsController = Router();
+const getAllAssets =  async (req, res)=> {
+  const data = await assetsModel.getAllAssets();
+  return res.status(200).json(data);
+};
 
-// assetsController.get('/', async (req, res)=> {
-//   const result = await assetsService.getAvailableAssets();
-//   console.log('result: ', result);
-//   return res.status(200).json(result);
-// });
+const createAsset = async (req, res)=> {
+  const { stock } = req.body;
+  const response = await assetsService.addNewAsset(stock);
+  return res.status(201).json(response);
+};
 
-// assetsController.post('/', async (req, res)=> {
-//   await assetsService.addNewAsset(req.body);
-//   return res.status(200).json({msg: 'ok'});
-// });
-
-assetsController.get('/:idCliente', async (req, res)=> {
-  await assetsService.addNewAsset(req.body);
-  return res.status(200).json({msg: 'ok'});
-});
-// retorna todos ativos de cliente tal
-
-
-assetsController.get('/:idAtivo', async (req, res)=> {
-  await assetsService.addNewAsset(req.body);
-  return res.status(200).json({msg: 'ok'});
-});
-
-// retorna informações do ativo tal (id/nome, valor, volume...)
-
-assetsController.get('/', async (req, res)=> {
-  const response = await getStockInfo();
-  return res.status(200).json(response);
-});
-
-// retorna todos ativos da b3
-
-module.exports = assetsController;
+module.exports = {
+  getAllAssets,
+  createAsset
+};
