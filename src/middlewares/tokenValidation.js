@@ -1,13 +1,23 @@
 const { tokenAuth } = require('../utils/jwt');
 
 const tokenValidation = async (req, res, next) => {
-  const token = req.headers.authorization;
-  if (!token) {
+  const auth = req.headers.authorization;
+  if (!auth) {
     return res.status(401).json({ message: 'O token não foi encontrado' });
   }
-  const isValid = await tokenAuth(token);
-  if (token && !isValid) {
-    return res.status(401).json({ message: 'O token é invalido ou está expirado' });
+  if ( auth[0] === 'B') {
+    console.log('pelo swagger');
+    const [, token] = auth.split(' ');
+    const isValid = await tokenAuth(token);
+    if (token && !isValid) {
+      return res.status(401).json({ message: 'O token é invalido ou está expirado' });
+    }
+  } else {
+    console.log('normal');
+    const isValid = await tokenAuth(auth);
+    if (auth && !isValid) {
+      return res.status(401).json({ message: 'O token é invalido ou está expirado' });
+    }
   }
   next();
 };
