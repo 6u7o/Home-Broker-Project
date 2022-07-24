@@ -5,7 +5,7 @@ const salesValidation = async (req, res, next) => {
 
   const [response] = await investimentsModel.checkUserAssetStatus(user_id, asset_id);
   if (typeof response === 'undefined') { 
-    return res.status(404).json({message: 'user doesnt have this asset'})
+    return res.status(404).json({message: 'O usuário não possue este ativo'})
   }
   next();
 };

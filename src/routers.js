@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const { tokenValidation } = require('./middlewares/tokenValidation');
-const investmentsRouter = require('./routers/investmentsRouter');
-const accountsRouter = require('./routers/accountsRouter');
-const assetsRouter = require('./routers/assetsRouter');
-const loginRouter = require('./routers/loginRouter');
+const investmentsRouter = require('./routes/investmentsRouter');
+const accountsRouter = require('./routes/accountsRouter');
+const assetsRouter = require('./routes/assetsRouter');
+const loginRouter = require('./routes/loginRouter');
 
 const routers = Router();
 

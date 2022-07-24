@@ -1,6 +1,5 @@
 const supabase = require('../db/connection');
 const accountsModel = require('../models/accountsModel')
-// const assetsModel = require('../models/assetsModel')
 
 const buy = async (buyOrder) => {
   const { data } = await supabase.from('UsersAssets')

@@ -9,19 +9,17 @@ const buy = async (buyOrder) => {
   const total = asset_price * asset_quantity;
   const newAssetAmount = available_quantity - asset_quantity;
   const [userInfo] = await accountsModel.getUserInfo(user_id);
-  // validação para não permitir a compra se o usuário não tiver saldo para isso
   if (total > userInfo.balance) {
     return false
   }
   let result;
-  // validação para não permitir compra maior do que disponível para venda
   if (newAssetAmount <= 0) {
     const newOrder = {
       user_id,
       asset_id,
       available_quantity
     }
-    // PRA FAZER: verificação para saber se o usuário já não possui uma ação desse tipo, se sim, somar a quantidade comprada ao UsersAssets
+    // f verificação para saber se o usuário já não possui uma ação desse tipo, se sim, somar a quantidade comprada ao UsersAssets
 
     result = await investmentsModel.buy(newOrder);
     await investmentsModel.sumAssetQuant(0, 0, asset_id)
