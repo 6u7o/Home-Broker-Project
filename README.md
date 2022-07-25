@@ -28,6 +28,24 @@ Esta é uma API Restfull que simula uma corretora de investimentos, sendo possí
 ### Swagger
  - [DOCS](https://home-broker.herokuapp.com/docs/)
 
+### Para rodar localmente
+```
+git clone git@github.com:6u7o/Home-Broker-Project.git
+```
+```
+cd Home-Broker-Project
+```
+```
+npm install
+```
+
+mude o nome de ".env_example" para ".env"
+
+```
+npm run dev
+```
+
+ 
 ### Banco de dados
 ![image](https://user-images.githubusercontent.com/92962445/180678206-0cb823ea-4640-4eb5-8a81-e65c615d044d.png)
 
