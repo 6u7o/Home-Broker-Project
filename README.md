@@ -22,6 +22,7 @@ Esta é uma API Restfull que simula uma corretora de investimentos, sendo possí
 
 
 ### Deploy da aplicação
+- <a href="home-broker.herokuapp.com">Home Broker</a>
 - [Home Broker](home-broker.herokuapp.com)
 
 ### aaaaaaa
