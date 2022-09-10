@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { deposito, saque, saldo, ativosCliente } = require('../controllers/accountsController');
-const { reqBodyIdValidation, reqParamsIdValidation } = require('../middlewares/userOrderValidation');
+const { reqBodyIdValidation/* , reqParamsIdValidation  */} = require('../middlewares/userOrderValidation');
 
 const accountsRouter = Router();
 
@@ -148,7 +148,7 @@ const accountsRouter = Router();
  *            type: number
  */
 
-accountsRouter.get('/:idCliente', reqParamsIdValidation, saldo);
+accountsRouter.get('/'/* , reqParamsIdValidation */, saldo);
 
 /**
  * @swagger
@@ -239,7 +239,7 @@ accountsRouter.post('/saque', reqBodyIdValidation, saque);
  *                $ref: "#/components/schemas/errorToken"
  */
 
-accountsRouter.get('/ativos/:idCliente', reqParamsIdValidation, ativosCliente);
+accountsRouter.get('/ativos/'/* , reqParamsIdValidation */, ativosCliente);
 
 /**
  * @swagger
