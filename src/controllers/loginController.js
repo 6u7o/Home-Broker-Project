@@ -7,7 +7,7 @@ const login = async (req, res)=> {
   }
   const response = await loginService.checkLogin(email, password);
   if (!response) return res.status(400).json({ message: 'Campos inválidos' });
-  return res.status(200).json({ token: response });
+  return res.status(201).json({ token: response });
 };
 
 const cadastro = async (req, res)=> {

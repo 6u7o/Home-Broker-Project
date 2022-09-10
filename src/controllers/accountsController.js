@@ -1,5 +1,5 @@
 const accountsService = require('../services/accountsService');
-
+const { tokenAuth } = require('../utils/jwt');
 
 const deposito = async (req, res)=> {
   const {user_id, value} = req.body;
@@ -17,13 +17,16 @@ const saque = async (req, res)=> {
 };
 
 const saldo = async (req, res)=> {
-  const { idCliente } = req.params;
+  const { id } = await tokenAuth(req.headers.authorization);
+  const idCliente = id;
+  // const { idCliente } = req.params;
   const response = await accountsService.getUserInfo(idCliente);
   return res.status(200).json(response);
 };
 
 const ativosCliente = async (req, res)=> {
-  const { idCliente } = req.params;
+  const { id } = await tokenAuth(req.headers.authorization);
+  const idCliente = id;
   const response = await accountsService.getAssetsByClientId(idCliente);
   return res.status(200).json(response);
 };
