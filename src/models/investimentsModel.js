@@ -1,9 +1,38 @@
 const supabase = require('../db/connection');
 const accountsModel = require('../models/accountsModel')
 
-const buy = async (buyOrder) => {
+const buy = async (buyOrder, asset_price) => {
   const { data } = await supabase.from('UsersAssets')
-    .insert([buyOrder])
+    .insert([buyOrder]);
+
+  const orderObj = {
+    user_id: buyOrder.user_id,
+    asset_id: buyOrder.asset_id,
+    quantity: buyOrder.asset_quantity,
+    date_price: asset_price,
+    type: 'buy'
+  }
+  /* const { data } =  */await supabase.from('Orders')
+    .insert([orderObj]);
+  return data;
+}
+
+const updateBuy = async (ID, newAmount, sellOrder, asset_price) => {
+  /* const { data } =  */await supabase.from('UsersAssets')
+  .update({ asset_quantity: newAmount })
+  .match({ id: ID})
+
+
+  const orderObj = {
+    user_id: sellOrder.user_id,
+    asset_id: sellOrder.asset_id,
+    quantity: sellOrder.asset_quantity,
+    date_price: asset_price,
+    type: 'buy'
+  }
+  const { data } = await supabase.from('Orders')
+    .insert([orderObj]);
+  console.log('updateBuy data: ', data);
   return data;
 }
 
@@ -46,13 +75,24 @@ const checkUserAssetStatus = async (userId, assetId) => {
     .select()
     .eq('user_id', userId)
     .eq('asset_id', assetId)
+  console.log('data Users Assests: ', data);
   return data;
 }
 
-const sell = async (ID, newAmount) => {
+const sell = async (ID, newAmount, sellOrder, asset_price) => {
   const { data } = await supabase.from('UsersAssets')
     .update({ asset_quantity: newAmount })
     .match({ id: ID})
+
+  const orderObj = {
+    user_id: sellOrder.user_id,
+    asset_id: sellOrder.asset_id,
+    quantity: sellOrder.asset_quantity,
+    date_price: asset_price,
+    type: 'sell'
+  }
+  /* const { data } =  */await supabase.from('Orders')
+    .insert([orderObj]);
   return data;
 }
 
@@ -72,5 +112,6 @@ module.exports = {
   checkUserAssetStatus,
   deleteUsersAsset,
   sumAssetQuant,
-  sumUserBalance
+  sumUserBalance,
+  updateBuy
 };
