@@ -27,7 +27,7 @@ Esta é uma API Restfull que simula uma corretora de investimentos, sendo possí
 
 ### Swagger
  - [DOCS](https://home-broker.herokuapp.com/docs/)
- - Passe os seguintes EMAIL e PASSWORD como parâmetros no enpoint LOGIN para reber um TOKEN que deve ser passado nos demais endpoints:
+ - Passe os seguintes EMAIL e PASSWORD como parâmetros no enpoint LOGIN para receber um TOKEN que deverá ser passado nos demais endpoints:
 ```
 test@test.com
 ```
